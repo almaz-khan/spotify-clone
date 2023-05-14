@@ -1,8 +1,8 @@
 import Song from "@/components/Song";
 import { fetchSpotify } from "@/lib/spotify";
+import { Owner, Track, SpotifyImage } from "@/types/spotify";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import { FC } from "react";
 
 interface pageProps {
   params: {
@@ -10,45 +10,31 @@ interface pageProps {
   };
 }
 
-interface Playlist {
-  id: string;
+interface PlaylistData {
+  type: "playlist";
   name: string;
-  images: Image[];
-  tracks: Track;
-}
-
-interface Image {
-  url: string;
-}
-
-interface Track {
-  items: TrackInfo[];
-}
-
-interface TrackInfo {
-  added_at: "2023-02-20T13:59:43Z";
-  track: {
-    id: string;
-    is_local: boolean;
-    name: string;
-    popularity: number;
-    preview_url: string;
+  colobarative: boolean;
+  description: string;
+  followers: {
+    total: number;
+  };
+  images: SpotifyImage[];
+  owner: Owner;
+  tracks: {
+    items: PlaylistTrackObject[];
   };
 }
 
-interface TrackData {
-  id: string;
-  name: string;
-  artists: Artist[];
-}
-
-interface Artist {
-  name: string;
+interface PlaylistTrackObject {
+  added_at: string;
+  added_by: Owner;
+  is_local: boolean;
+  track: Track;
 }
 
 const page = async ({ params }: pageProps) => {
-  const playlistData: Playlist = await fetchSpotify(
-    `https://api.spotify.com/v1/playlists/${params.playlistId}`
+  const playlistData: PlaylistData = await fetchSpotify(
+    `/playlists/${params.playlistId}`
   );
 
   return (

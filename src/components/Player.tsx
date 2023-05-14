@@ -1,42 +1,19 @@
 "use client";
 
+import { Track } from "@/types/spotify";
 import { PauseIcon, PlayIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { FC, useState } from "react";
 
 interface PlayerProps {}
 
-interface SongInfo {
-  album: Album;
-  name: string;
-  artists: Artist[];
-}
-
-interface Artist {
-  name: string;
-}
-
-interface Album {
-  images: Image[];
-}
-
-interface Image {
-  url: string;
-}
-
 const Player: FC<PlayerProps> = ({}) => {
-  const songInfo: SongInfo = {
-    album: {
-      images: [{ url: "" }],
-    },
-    name: "Song Name",
-    artists: [{ name: "Artist Name" }],
-  };
+  const songInfo: any = null;
 
   const [playing, setPlaying] = useState(false);
 
   return (
-    <div className="h-full bg-neutral-800 border-t border-neutral-700 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
+    <div className="h-full text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
       <div className="flex items-center space-x-4">
         {songInfo?.album.images[0].url && (
           <Image

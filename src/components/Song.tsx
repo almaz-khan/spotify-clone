@@ -1,8 +1,9 @@
+import { Track } from "@/types/spotify";
 import Image from "next/image";
 import { FC } from "react";
 
 interface SongProps {
-  track: any;
+  track: Track;
 }
 
 const Song: FC<SongProps> = ({ track }) => {
